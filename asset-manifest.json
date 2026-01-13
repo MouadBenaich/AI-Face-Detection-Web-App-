@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/MouadBenaich/AI-Face-Detection-Web-App-/static/css/main.37534850.css",
+    "main.js": "/MouadBenaich/AI-Face-Detection-Web-App-/static/js/main.eb184e86.js",
+    "static/js/453.b9256582.chunk.js": "/MouadBenaich/AI-Face-Detection-Web-App-/static/js/453.b9256582.chunk.js",
+    "static/media/brain.png": "/MouadBenaich/AI-Face-Detection-Web-App-/static/media/brain.447bba5c56c0f1be35ed.png",
+    "static/media/axios.cjs": "/MouadBenaich/AI-Face-Detection-Web-App-/static/media/axios.f821c7d7f6a2aa337c69.cjs",
+    "index.html": "/MouadBenaich/AI-Face-Detection-Web-App-/index.html",
+    "main.37534850.css.map": "/MouadBenaich/AI-Face-Detection-Web-App-/static/css/main.37534850.css.map",
+    "main.eb184e86.js.map": "/MouadBenaich/AI-Face-Detection-Web-App-/static/js/main.eb184e86.js.map",
+    "453.b9256582.chunk.js.map": "/MouadBenaich/AI-Face-Detection-Web-App-/static/js/453.b9256582.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37534850.css",
+    "static/js/main.eb184e86.js"
+  ]
+}
