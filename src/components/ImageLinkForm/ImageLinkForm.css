@@ -1,0 +1,91 @@
+.image-link-form {
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  /* Neon background + border */
+  background: rgba(0, 255, 225, 0.1); /* subtle neon tint */
+  border: 2px solid #00ffe1;
+  box-shadow: 0 0 20px #00ffe1, inset 0 0 10px #00ffe1;
+}
+
+.image-link-form:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px #00ffe1, inset 0 0 15px #00ffe1;
+}
+
+.image-link-form p {
+  color: #ffffff;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 8px #00ffe1;
+}
+
+/* Flex container for input + button */
+.form-container {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Input field */
+.input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px 0 0 8px;
+  background-color: #1c1f24;
+  color: #ffffff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.input-field:focus {
+  box-shadow: 0 0 10px #00ffe1;
+  transform: scale(1.02);
+}
+
+/* Detect button */
+.detect-button {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem;
+  background: #00ffe1;
+  color: #000000;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.detect-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffe1;
+  background: #7b2ff7; /* hover gradient shift */
+  color: #ffffff;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 600px) {
+  .form-container {
+    flex-direction: column;
+  }
+
+  .input-field {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .detect-button {
+    border-radius: 8px;
+    width: 100%;
+  }
+}
