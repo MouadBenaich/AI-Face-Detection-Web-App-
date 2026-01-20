@@ -66,10 +66,11 @@ class App extends Component {
         <div className="center">
           <div className="absolute mt2">
             <img 
-            src={this.state.imageUrl} 
-            alt="" 
-            width="500px" 
-            height="auto" />
+              id="inputImage" 
+              src={this.state.imageUrl} 
+              alt="" 
+              width="500px" 
+              height="auto" />
             <div 
               className="bounding-box" 
               style={{ 
@@ -77,6 +78,9 @@ class App extends Component {
                 right: this.state.box.rightCol, 
                 bottom: this.state.box.bottomRow, 
                 left: this.state.box.leftCol, 
+                position: "absolute", // ✅ ensure overlay works 
+                boxShadow: "0 0 0 3px #149df2 inset", // ✅ visible border 
+                cursor: "pointer"
               }} 
             ></div>
           </div>
