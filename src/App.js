@@ -4,6 +4,8 @@ import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
+import { onInputChange, onButtonSubmit } from "./components/FaceRecognition/FaceApiHelpers";
 import "./App.css";
 import "tachyons";
 
@@ -11,48 +13,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
+      input: "",
       imageUrl: "",
-      box: {}
+      box: []
     };
   }
-  displayFaceBox = (box) => { 
-    this.setState({ box: box }); 
-  };
-  onInputChange = (event) => {
-    this.setState({ input: event.target.value });
-  }
-  onButtonSubmit = (event) => {
-    event.preventDefault();
-    this.setState({ imageUrl: this.state.input });
 
-    fetch("https://clarifai-backend.onrender.com/facepp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageUrl: this.state.input })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Face++ response:", data);
-        if (data.faces && data.faces.length > 0) {
-          const face = data.faces[0].face_rectangle;
-          const image = document.getElementById("inputImage");
-          const width = Number(image.width);
-          const height = Number(image.height);
-
-          const box = {
-            leftCol: face.left,
-            topRow: face.top,
-            rightCol: width - (face.left + face.width),
-            bottomRow: height - (face.top + face.height),
-          };
-          this.displayFaceBox(box);
-        } else {
-          console.log("No face detected");
-        }
-      })
-      .catch((err) => console.error(err));
-  };
   render() {
     return (
       <div className="App">
@@ -61,36 +27,17 @@ class App extends Component {
         <Logo />
         <Rank />
         <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
+          onInputChange={onInputChange((val) => this.setState({ input: val }))}
+          onButtonSubmit={onButtonSubmit(
+            this.state.input,
+            (val) => this.setState({ imageUrl: val }),
+            (val) => this.setState({ box: val })
+          )}
         />
-        <div className="center">
-          <div className="absolute mt2">
-            {this.state.imageUrl && (
-              <>
-                <img 
-                  id="inputImage" 
-                  src={this.state.imageUrl} 
-                  alt="" 
-                  width="500px" 
-                  height="auto" 
-                />
-                <div 
-                  className="bounding-box" 
-                  style={{ 
-                    top: this.state.box.topRow, 
-                    right: this.state.box.rightCol, 
-                    bottom: this.state.box.bottomRow, 
-                    left: this.state.box.leftCol, 
-                    position: "absolute", // ✅ ensure overlay works 
-                    boxShadow: "0 0 0 3px #149df2 inset", // ✅ visible border 
-                    cursor: "pointer"
-                  }} 
-                ></div>
-              </>
-            )}
-          </div>
-        </div>
+        <FaceRecognition
+          imageUrl={this.state.imageUrl}
+          boxes={this.state.box}
+        />
       </div>
     );
   }
