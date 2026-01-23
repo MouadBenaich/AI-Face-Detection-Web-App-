@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./FaceRecognition.css";
 
 const FaceRecognition = ({ imageUrl, boxes }) => {
+  const imageRef = useRef(null);
+
   return (
     <div className="center">
       <div className="absolute mt2">
         {imageUrl && (
           <>
             <img
-              id="inputImage"
+              ref={imageRef}   // ✅ use ref instead of id
+              id="inputImage"  // optional: keep id if you still want it
               src={imageUrl}
               alt=""
               width="500px"
               height="auto"
+              onLoad={() => {
+                console.log("Image loaded, boxes aligned correctly");
+              }}
             />
             {Array.isArray(boxes) &&
               boxes.map((box, i) => (
