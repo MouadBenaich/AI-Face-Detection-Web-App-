@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/AI-Face-Detection-Web-App-/static/css/main.37534850.css",
-    "main.js": "/AI-Face-Detection-Web-App-/static/js/main.601c9141.js",
+    "main.css": "/AI-Face-Detection-Web-App-/static/css/main.16633f7a.css",
+    "main.js": "/AI-Face-Detection-Web-App-/static/js/main.eb551a5e.js",
     "static/js/453.02dcf388.chunk.js": "/AI-Face-Detection-Web-App-/static/js/453.02dcf388.chunk.js",
     "static/media/brain.png": "/AI-Face-Detection-Web-App-/static/media/brain.447bba5c56c0f1be35ed.png",
     "index.html": "/AI-Face-Detection-Web-App-/index.html",
-    "main.37534850.css.map": "/AI-Face-Detection-Web-App-/static/css/main.37534850.css.map",
-    "main.601c9141.js.map": "/AI-Face-Detection-Web-App-/static/js/main.601c9141.js.map",
+    "main.16633f7a.css.map": "/AI-Face-Detection-Web-App-/static/css/main.16633f7a.css.map",
+    "main.eb551a5e.js.map": "/AI-Face-Detection-Web-App-/static/js/main.eb551a5e.js.map",
     "453.02dcf388.chunk.js.map": "/AI-Face-Detection-Web-App-/static/js/453.02dcf388.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.37534850.css",
-    "static/js/main.601c9141.js"
+    "static/css/main.16633f7a.css",
+    "static/js/main.eb551a5e.js"
   ]
 }
