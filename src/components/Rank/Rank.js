@@ -17,7 +17,7 @@ const Rank = () => {
         style={{ borderRadius: '12px' }}
       >
         <div className="rank-container">
-          <p className="rank-text">Boka, your current rank is...</p>
+          <p className="rank-text">Abdo, your current rank is...</p>
           <p className="rank-number">#9</p>
         </div>
       </Tilt>

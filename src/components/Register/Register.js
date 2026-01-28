@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Register.css"; // ✅ reuse the same CSS styling
+import "./Register.css";
 
 const Register = ({ onRouteChange }) => {
   const [name, setName] = useState("");
@@ -8,15 +8,14 @@ const Register = ({ onRouteChange }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  // ✅ Email validation
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    // ✅ Validation
+    // ✅ Client-side validation
     if (name.trim() === "") {
       setError("Name cannot be empty.");
       return;
@@ -25,20 +24,38 @@ const Register = ({ onRouteChange }) => {
       setError("Please enter a valid email address.");
       return;
     }
-    if (password.trim() === "") {
-      setError("Password cannot be empty.");
+    if (password.trim().length < 6) {
+      setError("Password must be at least 6 characters.");
       return;
     }
 
-    // ✅ Loading state
     setLoading(true);
 
-    // Simulate async register (replace with real API call)
-    setTimeout(() => {
+    try {
+      // ✅ Call backend API
+      const response = await fetch(
+        "https://clarifai-backend.onrender.com/register", // 🔗 your Render backend URL
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        }
+      );
+
+      const user = await response.json();
+
+      if (response.ok && user.id) {
+        // ✅ Registration successful
+        console.log("User registered:", user);
+        onRouteChange("home");
+      } else {
+        setError(user || "Unable to register");
+      }
+    } catch (err) {
+      setError("Server error. Please try again later.");
+    } finally {
       setLoading(false);
-      alert("Registered successfully!"); // Replace with navigation or API response
-      onRouteChange("home"); // ✅ go to home after register
-    }, 2000);
+    }
   };
 
   return (
@@ -50,11 +67,13 @@ const Register = ({ onRouteChange }) => {
 
       <label htmlFor="name">Name</label>
       <input
-        type="name"
+        type="text"
         id="name"
         name="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        autoComplete="name"
+        required
       />
 
       <label htmlFor="email">Email</label>
@@ -64,6 +83,8 @@ const Register = ({ onRouteChange }) => {
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        autoComplete="email"
+        required
       />
 
       <label htmlFor="password">Password</label>
@@ -73,6 +94,8 @@ const Register = ({ onRouteChange }) => {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        autoComplete="new-password"
+        required
       />
 
       <button type="submit" disabled={loading}>
