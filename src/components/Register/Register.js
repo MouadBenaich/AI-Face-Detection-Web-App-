@@ -33,8 +33,7 @@ const Register = ({ onRouteChange }) => {
 
     try {
       // ✅ Call backend API
-      const response = await fetch(
-        "https://clarifai-backend.onrender.com/register", // 🔗 your Render backend URL
+      const response = await fetch("https://clarifai-backend.onrender.com/register", // 🔗 your Render backend URL
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -67,7 +66,7 @@ const Register = ({ onRouteChange }) => {
 
       <label htmlFor="name">Name</label>
       <input
-        type="text"
+        type="name"
         id="name"
         name="name"
         value={name}
