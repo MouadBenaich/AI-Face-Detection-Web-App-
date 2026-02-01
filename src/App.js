@@ -7,7 +7,6 @@ import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
-import { onInputChange, onButtonSubmit } from "./components/FaceRecognition/FaceApiHelpers";
 import "./App.css";
 import "tachyons";
 
@@ -18,47 +17,71 @@ class App extends Component {
       input: "",
       imageUrl: "",
       box: [],
-      route: 'signin',
+      route: "signin",
       isSignedIn: false,
+      user: {} // ✅ store logged-in user
     };
   }
-  onRouteChange = (route) =>{
-    if (route === 'signout'){
-      this.setState({isSignedIn: false})
-    } else if (route === 'home') {
-      this.setState({isSignedIn: true})
+
+  setUser = (user) => {
+    this.setState({ user });
+  };
+
+  onRouteChange = (route) => {
+    if (route === "signout") {
+      this.setState({ isSignedIn: false, user: {} });
+    } else if (route === "home") {
+      this.setState({ isSignedIn: true });
     }
-    this.setState({route: route});
-  }
+    this.setState({ route });
+  };
+  onButtonSubmit = () => {
+    fetch("https://clarifai-backend.onrender.com/facepp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        imageUrl: this.state.input,
+        userId: this.state.user.id
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.faces) {
+          this.setState({ imageUrl: this.state.input, box: data.faces });
+          if (data.user) {
+            this.setUser(data.user); // ✅ update level
+          }
+        }
+      })
+      .catch(err => console.error(err));
+  };
 
   render() {
     return (
       <div className="App">
         <ParticlesBackground />
-        <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
-        { this.state.route === 'home'
-          ? <div>
-              <Logo />
-              <Rank />
-              <ImageLinkForm
-                onInputChange={onInputChange((val) => this.setState({ input: val }))}
-                onButtonSubmit={onButtonSubmit(
-                  this.state.input,
-                  (val) => this.setState({ imageUrl: val }),
-                  (val) => this.setState({ box: val })
-                )}
-              />
-              <FaceRecognition
-                imageUrl={this.state.imageUrl}
-                boxes={this.state.box}
-              />
-            </div>
-          : (
-            this.state.route === 'signin'
-              ? <Signin onRouteChange={this.onRouteChange}/>
-              : <Register onRouteChange={this.onRouteChange}/>
-            )
-        }
+        <Navigation
+          isSignedIn={this.state.isSignedIn}
+          onRouteChange={this.onRouteChange}
+        />
+        {this.state.route === "home" ? (
+          <div>
+            <Logo />
+            <Rank user={this.state.user} /> {/* ✅ show level */}
+            <ImageLinkForm
+              onInputChange={(val) => this.setState({ input: val })}
+              onButtonSubmit={this.onButtonSubmit}
+            />
+            <FaceRecognition
+              imageUrl={this.state.imageUrl}
+              boxes={this.state.box}
+            />
+          </div>
+        ) : this.state.route === "signin" ? (
+          <Signin onRouteChange={this.onRouteChange} setUser={this.setUser} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} setUser={this.setUser} />
+        )}
       </div>
     );
   }

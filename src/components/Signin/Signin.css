@@ -1,5 +1,11 @@
 /* Signin.css */
-
+.signin-container { 
+  margin-top: 80px; /* ✅ pushes form down from Navigation */ 
+  display: flex; 
+  justify-content: center; /* centers horizontally */ 
+  align-items: center;
+  min-height: calc(100vh - 80px); /* ensures full viewport height minus nav */
+}
 .signin-form {
   margin: 5rem auto;
   padding: 2rem;
