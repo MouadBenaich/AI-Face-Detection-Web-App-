@@ -35,3 +35,17 @@ An interactive web application built with **React.js**, **Node.js/Express**, and
 
 ## 📂 Project Structure
 
+AI-Face-Detection-Web-App/
+│
+├── client/                # React frontend
+│   ├── src/
+│   │   ├── components/    # Reusable UI components
+│   │   ├── App.js          # Main app logic
+│   │   └── index.js        # Entry point
+│   └── public/
+│
+├── server/                # Express backend
+│   ├── server.js           # API routes (register, signin, facepp)
+│   └── ...
+│
+└── README.md               # Project documentation
