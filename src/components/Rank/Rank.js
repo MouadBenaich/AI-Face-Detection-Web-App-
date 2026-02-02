@@ -1,7 +1,7 @@
 import React from "react";
 import Tilt from 'react-parallax-tilt';
 
-const Rank = () => {
+const Rank = ({ user }) => {
   return (
     <div className="ma4 mt0">
       <Tilt
@@ -17,8 +17,10 @@ const Rank = () => {
         style={{ borderRadius: '12px' }}
       >
         <div className="rank-container">
-          <p className="rank-text">Abdo, your current rank is...</p>
-          <p className="rank-number">#9</p>
+          <p className="rank-text">
+            {user.name}, your current level is...
+          </p>
+          <p className="rank-number">{user.level || "Beginner"}</p>
         </div>
       </Tilt>
     </div>

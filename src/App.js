@@ -7,6 +7,12 @@ import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
+import Contact from "./components/Contact/Contact"; 
+import Footer from "./components/Footer/Footer";
+import Projects from "./components/Projects/Projects";
+import AiTools from "./components/AiTools/AiTools";
+import Business from "./components/Business/Business";
+import About from "./components/About/About";
 import "./App.css";
 import "tachyons";
 
@@ -29,12 +35,15 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "signout") {
-      this.setState({ isSignedIn: false, user: {} });
+      // ✅ reset everything and send user to Signin
+      this.setState({ isSignedIn: false, user: {}, route: "signin" });
     } else if (route === "home") {
-      this.setState({ isSignedIn: true });
+      this.setState({ isSignedIn: true, route: "home" });
+    } else {
+      this.setState({ route });
     }
-    this.setState({ route });
   };
+
   onButtonSubmit = () => {
     fetch("https://clarifai-backend.onrender.com/facepp", {
       method: "POST",
@@ -64,24 +73,38 @@ class App extends Component {
           isSignedIn={this.state.isSignedIn}
           onRouteChange={this.onRouteChange}
         />
-        {this.state.route === "home" ? (
-          <div>
-            <Logo />
-            <Rank user={this.state.user} /> {/* ✅ show level */}
-            <ImageLinkForm
-              onInputChange={(val) => this.setState({ input: val })}
-              onButtonSubmit={this.onButtonSubmit}
-            />
-            <FaceRecognition
-              imageUrl={this.state.imageUrl}
-              boxes={this.state.box}
-            />
-          </div>
-        ) : this.state.route === "signin" ? (
-          <Signin onRouteChange={this.onRouteChange} setUser={this.setUser} />
-        ) : (
-          <Register onRouteChange={this.onRouteChange} setUser={this.setUser} />
-        )}
+        <main>
+          {this.state.route === "home" ? (
+            <div>
+              <Logo />
+              <Rank user={this.state.user} /> {/* ✅ show level */}
+              <ImageLinkForm
+                onInputChange={(val) => this.setState({ input: val })}
+                onButtonSubmit={this.onButtonSubmit}
+              />
+              <FaceRecognition
+                imageUrl={this.state.imageUrl}
+                boxes={this.state.box}
+              />
+            </div>
+
+          ) : this.state.route === "signin" ? (
+            <Signin onRouteChange={this.onRouteChange} setUser={this.setUser} />
+          ) : this.state.route === "register" ? (
+            <Register onRouteChange={this.onRouteChange} setUser={this.setUser} />
+          ) : this.state.route === "projects" ? (
+             <Projects /> 
+          ) : this.state.route === "ai-tools" ? ( 
+          <AiTools /> 
+          ) : this.state.route === "business" ? (
+            <Business /> 
+          ) : this.state.route === "about" ? (
+             <About /> 
+          ) : (
+            <Contact />
+          )}
+        </main>
+        <Footer /> {/* ✅ Footer always visible */}
       </div>
     );
   }
