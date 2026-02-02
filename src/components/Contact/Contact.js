@@ -2,6 +2,22 @@ import React from "react";
 import "./Contact.css";
 
 const Contact = () => {
+  const sendEmail = (e) => { 
+    e.preventDefault(); 
+    emailjs.sendForm( 
+      "service_btclcdr",  
+      "template_an4gpus", // from EmailJS dashboard
+      e.target, // form element 
+      "_aZiChi8fMT7vS5gj" // from EmailJS account 
+    ).then(
+       (result) => { 
+        alert("Message sent successfully!"); 
+       }, 
+       (error) => { 
+        alert("Failed to send message. Try again later.");
+       } 
+      ); 
+    };
   return (
     <div className="contact-container">
       <h2>Contact Me</h2>
