@@ -7,6 +7,7 @@ import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
+import { calculateFaceLocation } from "./components/FaceRecognition/FaceApiHelpers";
 import Contact from "./components/Contact/Contact"; 
 import Footer from "./components/Footer/Footer";
 import Projects from "./components/Projects/Projects";
@@ -48,21 +49,36 @@ class App extends Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        imageUrl: this.state.input,   // ✅ now guaranteed to be a string
+        imageUrl: this.state.input,
         userId: this.state.user.id
       })
     })
       .then(res => res.json())
       .then(data => {
-        if (data.faces) {
-          this.setState({ imageUrl: this.state.input, box: data.faces });
+        if (data.faces && data.faces.length > 0) {
+          const image = document.getElementById("inputImage");
+          if (image && image.complete) {
+            const boxes = calculateFaceLocation(data, image);
+            console.log("Boxes calculated:", boxes);
+            this.setState({ imageUrl: this.state.input, box: boxes });
+          } else if (image) {
+            image.onload = () => {
+              const boxes = calculateFaceLocation(data, image);
+              console.log("Boxes calculated after load:", boxes);
+              this.setState({ imageUrl: this.state.input, box: boxes });
+            };
+          }
           if (data.user) {
             this.setUser(data.user);
           }
+        } else {
+          console.warn("No faces detected");
+          this.setState({ imageUrl: this.state.input, box: [] });
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error("Face detection error:", err));
   };
+
 
   render() {
     return (

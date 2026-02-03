@@ -109,11 +109,14 @@
   }
 }
 main { 
-  flex: 1; /* content grows to fill space */ 
+  flex: 1; /*content grows to fill space*/ 
   position: relative;
   z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 footer {
-  position: relative;
   z-index: 2;
+  margin-top: auto;
 }
