@@ -35,7 +35,6 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "signout") {
-      // ✅ reset everything and send user to Signin
       this.setState({ isSignedIn: false, user: {}, route: "signin" });
     } else if (route === "home") {
       this.setState({ isSignedIn: true, route: "home" });
@@ -49,7 +48,7 @@ class App extends Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        imageUrl: this.state.input,
+        imageUrl: this.state.input,   // ✅ now guaranteed to be a string
         userId: this.state.user.id
       })
     })
@@ -58,7 +57,7 @@ class App extends Component {
         if (data.faces) {
           this.setState({ imageUrl: this.state.input, box: data.faces });
           if (data.user) {
-            this.setUser(data.user); // ✅ update level
+            this.setUser(data.user);
           }
         }
       })
@@ -77,9 +76,9 @@ class App extends Component {
           {this.state.route === "home" ? (
             <div>
               <Logo />
-              <Rank user={this.state.user} /> {/* ✅ show level */}
+              <Rank user={this.state.user} />
               <ImageLinkForm
-                onInputChange={(val) => this.setState({ input: val })}
+                onInputChange={(event) => this.setState({ input: event.target.value })} // ✅ FIXED
                 onButtonSubmit={this.onButtonSubmit}
               />
               <FaceRecognition
@@ -87,24 +86,23 @@ class App extends Component {
                 boxes={this.state.box}
               />
             </div>
-
           ) : this.state.route === "signin" ? (
             <Signin onRouteChange={this.onRouteChange} setUser={this.setUser} />
           ) : this.state.route === "register" ? (
             <Register onRouteChange={this.onRouteChange} setUser={this.setUser} />
           ) : this.state.route === "projects" ? (
-             <Projects /> 
-          ) : this.state.route === "ai-tools" ? ( 
-          <AiTools /> 
+            <Projects />
+          ) : this.state.route === "ai-tools" ? (
+            <AiTools />
           ) : this.state.route === "business" ? (
-            <Business /> 
+            <Business />
           ) : this.state.route === "about" ? (
-             <About /> 
+            <About />
           ) : (
             <Contact />
           )}
         </main>
-        <Footer /> {/* ✅ Footer always visible */}
+        <Footer />
       </div>
     );
   }
