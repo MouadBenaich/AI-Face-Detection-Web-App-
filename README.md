@@ -57,4 +57,4 @@ API keys are stored in .env and never exposed in frontend.
 
 .gitignore ensures .env and node_modules are not pushed to GitHub.
 
-Backend acts as a proxy to keep credentials safe.
+Backend acts as a proxy to keep credentials safe .
