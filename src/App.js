@@ -97,10 +97,12 @@ class App extends Component {
                 onInputChange={(event) => this.setState({ input: event.target.value })} // ✅ FIXED
                 onButtonSubmit={this.onButtonSubmit}
               />
-              <FaceRecognition
-                imageUrl={this.state.imageUrl}
-                boxes={this.state.box}
-              />
+              <div className="image-area">
+                <FaceRecognition
+                  imageUrl={this.state.imageUrl}
+                  boxes={this.state.box}
+                />
+              </div>
             </div>
           ) : this.state.route === "signin" ? (
             <Signin onRouteChange={this.onRouteChange} setUser={this.setUser} />

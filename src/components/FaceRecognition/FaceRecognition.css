@@ -4,3 +4,12 @@
   box-sizing: border-box;
   cursor: pointer;
 }
+.absolute-mt2 { 
+  flex: 1; /* takes available vertical space */ 
+  width: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; /* center image vertically */ 
+  margin: 20px 0; 
+  position: relative; /* bounding boxes absolute inside */ 
+}

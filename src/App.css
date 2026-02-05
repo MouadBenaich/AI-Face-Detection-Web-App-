@@ -116,6 +116,15 @@ main {
   align-items: center;
   justify-content: flex-start;
 }
+.image-area { 
+  flex: 1; /* takes available vertical space */ 
+  width: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; /* center image vertically */ 
+  margin: 20px 0; 
+  position: relative; /* bounding boxes absolute inside */ 
+}
 footer {
   z-index: 2;
   margin-top: auto;

@@ -6,7 +6,7 @@ const FaceRecognition = ({ imageUrl, boxes }) => {
 
   return (
     <div className="center">
-      <div className="absolute mt2">
+      <div className="absolute-mt2">
         {imageUrl && (
           <>
             <img
