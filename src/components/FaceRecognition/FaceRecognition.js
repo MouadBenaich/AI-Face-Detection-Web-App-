@@ -10,7 +10,7 @@ const FaceRecognition = ({ imageUrl, boxes }) => {
         {imageUrl && (
           <>
             <img
-              ref={imageRef}   // ✅ use ref instead of id
+              ref={imageRef}   // ✅ use ref instead of id 
               id="inputImage"  // optional: keep id if you still want it
               src={imageUrl}
               alt=""
