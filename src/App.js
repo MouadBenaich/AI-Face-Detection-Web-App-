@@ -94,7 +94,7 @@ class App extends Component {
               <Logo />
               <Rank user={this.state.user} />
               <ImageLinkForm
-                onInputChange={(event) => this.setState({ input: event.target.value })} // ✅ FIXED
+                onInputChange={(event) => this.setState({ input: event.target.value })} // ✅ FIXED 
                 onButtonSubmit={this.onButtonSubmit}
               />
               <div className="image-area">
