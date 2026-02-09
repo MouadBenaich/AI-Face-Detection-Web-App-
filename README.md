@@ -29,7 +29,7 @@ An interactive web application built with **React.js**, **Node.js/Express**, and
 
 **Deployment**
 - Render (backend + database)
-- GitHub Pages / Vercel (frontend)
+- GitHub Pages
 
 ---
 
