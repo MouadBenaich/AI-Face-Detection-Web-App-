@@ -17,7 +17,7 @@ const FaceRecognition = ({ imageUrl, boxes }) => {
               width="500px"
               height="auto"
               onLoad={() => {
-                console.log("Image loaded, boxes aligned correctly");
+                console.log("Image loaded, boxes aligned correctly"); // ✅ YOU DID IT!
               }}
             />
             {Array.isArray(boxes) &&
