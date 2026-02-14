@@ -76,7 +76,7 @@ class App extends Component {
           this.setState({ imageUrl: this.state.input, box: [] });
         }
       })
-      .catch(err => console.error("Face detection error:", err));
+      .catch(err => console.error("Face detection error:", err)); // ✅ FIXED 
   };
 
 
