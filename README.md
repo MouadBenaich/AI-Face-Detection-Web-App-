@@ -19,7 +19,7 @@ An interactive web application built with **React.js**, **Node.js/Express**, and
 **Frontend**
 - React.js
 - Tachyons (for styling)
-- Custom CSS (glassmorphism/neon effects)
+- Custom CSS ( "glassmorphism/neon" effects)
 
 **Backend**
 - Node.js + Express
